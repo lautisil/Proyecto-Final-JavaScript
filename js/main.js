@@ -58,8 +58,8 @@ if (miembro) {
 }
 
 
-let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Salir");
-while (opcion != 4) {
+let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Pagar.\n 5- Salir");
+while (opcion != 5) {
   switch(opcion) {
     case "1":
       let compraPerfume = prompt("Por esta semana tenemos en 20% de descuento los siguientes perfumes. \n1. Natura Rojo - " + natRojo + "\n2. Natura Azul - "+ natAzul +" \n3. Natura Verde - "+ natVerde +" \n4. Natura Violeta - " + natVioleta + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."  );
@@ -95,14 +95,37 @@ while (opcion != 4) {
       break;
 
     case "3":
-      let depositar = prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee deposita: ");
+      let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
       saldo += depositar;
       alert("Su nuevo saldo en su cuenta es de: " + saldo);
       break;
+
+    case "4":
+      let pago = prompt("Su cuenta dispone de: " + saldo + " pesos. El monto a pagar es de: " + carrito + " pesos. \nPresione '1' para pagar, '2' para volver atras o '3' para depositar en su cuenta.");
+      switch(pago) {
+        case "1":
+          if (carrito > saldo) {
+            alert("El saldo en su cuenta es inferior al monto que tiene en el carrito. Deposite plata.")
+            continue;
+          } else {
+            saldo -= carrito
+            alert("Su nuevo saldo en su cuenta es de: " + saldo);
+            break;
+          }
+        case "2":
+          break;
+        case "3":
+          let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
+          saldo += depositar;
+          alert("Su nuevo saldo en su cuenta es de: " + saldo);
+          continue;
+      }
+      break;
     
     default:
-      alert("Elija una opcion valida");
+      alert("Elija una opcion validaaaaaaaaaaaaaaa");
+      break;
 
   }
-  opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Salir")
+  opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Pagar.\n 5- Salir");
 }
