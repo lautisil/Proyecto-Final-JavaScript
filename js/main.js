@@ -123,7 +123,7 @@ while (opcion != 5) {
       break;
     
     default:
-      alert("Elija una opcion validaaaaaaaaaaaaaaa");
+      alert("Elija una opcion valida.");
       break;
 
   }
