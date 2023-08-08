@@ -1,20 +1,7 @@
-// TIENDA VENTA DE NATURA
-/* 
-1. Panel que diga "Bievenido/a a Tienda NaturaForEver. Donde cuidamos tu bolsillo y te ofrecemos la mejor calidad."
-2. Si ya eres miembro, introduce tu contraseña para acceder a ofertas exclusivas. Contraseña = 12345.
-3. Panel con nuestras ofertas y opciones. Eleccion de opciones. "Salir" para terminar.
-  3.1 Ofertas exclusivas por esta semana.
-  3.2 Carrito.
-  3.3 Eliminar articulo de carrito.
-  3.4 Salir
-4. Gracias vuelva pronto
-*/
-
-
-alert("Bievenido/a a Tienda NaturaForEver. \nDonde cuidamos tu bolsillo y te ofrecemos la mejor calidad.");
+alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
 
 // Confirmacion si es miembro
-let contraseña = "12345";
+let contraseña = "12345";  // ***  CONTRASEÑA  ***
 let miembro = false;
 
 function membresia() {
@@ -62,7 +49,12 @@ let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofer
 while (opcion != 5) {
   switch(opcion) {
     case "1":
-      let compraPerfume = prompt("Por esta semana tenemos en 20% de descuento los siguientes perfumes. \n1. Natura Rojo - " + natRojo + "\n2. Natura Azul - "+ natAzul +" \n3. Natura Verde - "+ natVerde +" \n4. Natura Violeta - " + natVioleta + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."  );
+      if (miembro) {
+        alert("Al ser miembro de ❤NaturaForEver❤ tiene un 20% de descuento.")
+      } else {
+        alert("Recuerda que siendo miembro de nuestra tienda podras acceder a descuentos exclusivos.")
+      }
+      let compraPerfume = prompt("Durante esta semana tendremos a tu disposicion estos perfumes: \n1. Natura Rojo - " + natRojo + "\n2. Natura Azul - "+ natAzul +" \n3. Natura Verde - "+ natVerde +" \n4. Natura Violeta - " + natVioleta + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."  );
 
       while (compraPerfume != 0) {
         switch (compraPerfume) {
