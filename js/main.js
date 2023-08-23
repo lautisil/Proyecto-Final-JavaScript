@@ -3,16 +3,20 @@ function membresia() {
   let esMiembro = prompt("Es miembro de nuestra tienda?: \n Responda con 1 para 'Si' y con 2 para 'No'.\n PD: contraseña:12345");
 
   if (esMiembro == "1") {
-    for (let i = 3; i > 0; i--) { 
+    for (let i = 3; i >= 0; i--) { 
       contraseñaIngresada = prompt("Introduzca su contraseña: ");
       if (contraseñaIngresada == contraseña) {
         alert("Bievenido Juan Perez! Tienes acceso a todos nuestros descuentos. Y un bono de $20.000 para tus primeras compras.");
         miembro = true;
+        saldo += 20000;
         break;
       } else {
-        alert("Contraseña erronea. Le quedan " + i + " intentos.");
+        if (i != 0){
+          alert("Contraseña erronea. Le quedan " + i + " intentos.");
+        }
       }
     }
+    alert("Contraseña erronea!\n Accedera a nuestra tienda sin promociones y descuentos.");
   } else {
     alert("Esta bien, accedera a nuestra tienda sin promociones y descuentos.");
   }
@@ -42,22 +46,22 @@ function comprarProducto() {
       case "1":
         carrito += perfumeRojo.precio;
         listaCarrito.push(perfumeRojo.nombre + " - $" + perfumeRojo.precio);
-        alert("Carrito: " + carrito);
+        alert("Carrito: " + carrito + " pesos.");
         break;
       case "2":
         carrito += perfumeAzul.precio;
         listaCarrito.push(perfumeAzul.nombre + " - $" + perfumeAzul.precio);
-        alert("Carrito: " + carrito);
+        alert("Carrito: " + carrito + " pesos.");
         break;
       case "3":
         carrito += cremaVerde.precio;
         listaCarrito.push(cremaVerde.nombre + " - $" + cremaVerde.precio);
-        alert("Carrito: " + carrito);
+        alert("Carrito: " + carrito + " pesos.");
         break;
       case "4":
         carrito += cremaVioleta.precio;
         listaCarrito.push(cremaVioleta.nombre + " - $" + cremaVioleta.precio);
-        alert("Carrito: " + carrito);
+        alert("Carrito: " + carrito + " pesos.");
         break;
       default:
         alert("Opcion no valida");
@@ -121,16 +125,47 @@ function eliminarProductoDelCarrito() {
   }
 }
 
+function depositarSaldo(){
+  let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
+  saldo += depositar;
+  alert("Su nuevo saldo en su cuenta es de: " + saldo + " pesos.");
+}
+
+function pagarProductos() {
+  let pago = prompt("Su cuenta dispone de: " + saldo + " pesos. El monto a pagar es de: " + carrito + " pesos. \nPresione '1' para pagar, '2' para volver atras o '3' para depositar en su cuenta.");
+  switch(pago) {
+    case "1":
+      if (carrito > saldo) {
+        alert("El saldo en su cuenta es inferior al monto que tiene en el carrito. Deposite plata.");
+        break;
+      } else if (carrito <= 0){
+        alert("No tiene nada en el carrito para pagar.");
+        break;
+      } else {
+        saldo -= carrito;
+        listaCarrito.length = 0;
+        carrito = 0;
+        alert("Pago exitoso. Su nuevo saldo en su cuenta es de: " + saldo + "pesos.");
+        break;
+      }
+    case "2":
+      break;
+    case "3":
+      depositarSaldo(depositar)
+      break;
+  }
+}
+
+
 // VARIABLES
 let contraseña = "12345";  // ***  CONTRASEÑA  ***
 let miembro = false;
 let elimProducto = false;
+let saldo = 0;
+let carrito = 0;
 
-
-/* * * * * * * CODIGO * * * * * * * */
-alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
-
-membresia()
+//ARRAYS
+const listaCarrito = [];
 
 /* PRODUCTOS */
 class Producto {
@@ -142,6 +177,7 @@ class Producto {
   };
 };
 
+
 const perfumeRojo = new Producto("Perfume", "Rojo", 20000, 5);
 const perfumeAzul = new Producto("Perfume", "Azul", 15000, 8);
 const cremaVerde = new Producto("Crema", "Verde", 10000, 12);
@@ -149,15 +185,10 @@ const cremaVioleta = new Producto("Crema", "Violeta", 6000, 23);
 
 const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
 
+/* * * * * * * CODIGO * * * * * * * */
+alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
 
-/* SALDO / CARRITO */
-let saldo = 0;
-let carrito = 0;
-
-if (miembro) { //saldo como miembro
-  saldo += 20000;
-}
-const listaCarrito = [];
+membresia()
 
 let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Pagar. \n 5- Salir");
 while (opcion != 5) {
@@ -174,41 +205,16 @@ while (opcion != 5) {
     case "2":
       mostrarCarrito();
       if (elimProducto) {
-        eliminarProductoDelCarrito()
+        eliminarProductoDelCarrito();
       }
       break;
 
     case "3":
-      let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
-      saldo += depositar;
-      alert("Su nuevo saldo en su cuenta es de: " + saldo + "pesos.");
+      depositarSaldo();
       break;
 
     case "4":
-      let pago = prompt("Su cuenta dispone de: " + saldo + " pesos. El monto a pagar es de: " + carrito + " pesos. \nPresione '1' para pagar, '2' para volver atras o '3' para depositar en su cuenta.");
-      switch(pago) {
-        case "1":
-          if (carrito > saldo) {
-            alert("El saldo en su cuenta es inferior al monto que tiene en el carrito. Deposite plata.");
-            continue;
-          } else if (carrito <= 0){
-            alert("No tiene nada en el carrito para pagar.");
-            break;
-          } else {
-            saldo -= carrito;
-            listaCarrito.length = 0;
-            carrito = 0;
-            alert("Pago exitoso. Su nuevo saldo en su cuenta es de: " + saldo + "pesos.");
-            break;
-          }
-        case "2":
-          break;
-        case "3":
-          let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
-          saldo += depositar;
-          alert("Su nuevo saldo en su cuenta es de: " + saldo + "pesos.");
-          continue;
-      }
+      pagarProductos();
       break;
 
     default:
