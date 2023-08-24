@@ -1,7 +1,6 @@
 /* VARIABLES */
-let contraseña = "12345";  // ***  CONTRASEÑA  ***
+const contraseña = "12345";  // ***  CONTRASEÑA  ***
 let miembro = false;
-let elimProducto = false;
 let saldo = 0;
 let carrito = 0;
 
@@ -27,6 +26,8 @@ const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
 
 /* FUNCIONES */
 function membresia() {
+  alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
+
   let esMiembro = prompt("Es miembro de nuestra tienda?: \n Responda con 1 para 'Si' y con 2 para 'No'.\n PD: contraseña:12345");
 
   if (esMiembro == "1") {
@@ -60,27 +61,40 @@ function aplicarDescuento(productos, descuento) {
 
 function ejecutarConMiembro(funcion) {
   if (miembro) { //aplica descuentos
+    alert("Al ser miembro de ❤NaturaForEver❤ tiene un 20% de descuento.");
     aplicarDescuento(productosNatura,20)
     funcion();
   } else { //no hay descuentos
+    alert("Recuerda que siendo miembro de nuestra tienda podras acceder a descuentos exclusivos.");
     funcion();
   }
 }
 
 function comprarProducto() {
-  let compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo).join("") + "\nSi desea comprar alguno de nuestros productos 2introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
+  let compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
 
-  while (compra != 0 && compra <= productosNatura.length ) {
-    // ID del producto
-    let productoCompradoID = productosNatura.find(el => {           //Método find
-      return el.id === compra;
-    });
+  while (compra != 0) {
+    if (compra > productosNatura.length || compra < 0) {
 
-    carrito += productoCompradoID.precio;
-    listaCarrito.push(productoCompradoID);
-    alert("Total del carrito: $" + carrito + " pesos.");
+      alert("El producto no esta a la venta todavia. Elije uno de los que tenemos a disposicion porfavor.")
+      
+      compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
 
-    compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo).join("") + "\nSi desea comprar alguno de nuestros productos 2introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
+    } else {
+      // ID del producto
+      let productoCompradoID = productosNatura.find(el => {
+        return el.id === compra;
+      });
+
+      carrito += productoCompradoID.precio;
+      listaCarrito.push(productoCompradoID);
+
+      alert("Total del carrito: $" + carrito + " pesos.");
+
+      compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
+    }
+
+    
   }
 }
 
@@ -89,14 +103,14 @@ function mostrarCarrito() {
     alert("El carrito está vacío.");
   } else {
     let mensaje = "Productos en el carrito:\n";
-    for (let i = 0; i < listaCarrito.length; i++) {
-      mensaje += (i + 1) + ". " + listaCarrito[i] + "\n";
-    }
-    mensaje += "\nTotal en el carrito: $" + carrito;
+    mensaje += listaCarrito.map((el) => {
+      return "ID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.";
+    }).join("\n")
+    mensaje += "\n\nTotal en el carrito: $" + carrito + " pesos.";
     let quiereEliminarProducto = prompt(mensaje + "\nDesea eliminar algun producto? Presione '1' para Si o '2' para no.");
     switch (quiereEliminarProducto) {
       case "1":
-        elimProducto = true;
+        eliminarProductoDelCarrito()
         break;
       case "2":
         break;
@@ -112,40 +126,25 @@ function eliminarProductoDelCarrito() {
     alert("El carrito está vacío.");
     return;
   }
-  let productoAEliminar = prompt("Ingrese el número del producto que desea eliminar del carrito:");
-  if (!isNaN(productoAEliminar)) {
-    productoAEliminar = parseInt(productoAEliminar);
-
-    if (productoAEliminar >= 1 && productoAEliminar <= listaCarrito.length) {
-      let productoEliminado = listaCarrito.splice(productoAEliminar - 1, 1)[0];
-
-      let nombreProductoEliminado = productoEliminado.split(" - $")[0];
-
-      let precioEliminado = parseFloat(productoEliminado.split(" - $")[1]);
-
-      carrito -= precioEliminado;
-
-      for (let i = 0; i < listaCarrito.length; i++) {
-        listaCarrito[i].indice = i + 1;
-      }
-      alert("Se ha eliminado '" + nombreProductoEliminado  + "' del carrito.");
-      elimProducto = false;
-    } else {
-      alert("Número de producto no válido. Por favor, ingrese un número de producto válido.");
-    }
+  let productoAEliminar = parseInt(prompt("Ingrese el número de ID del producto que desea eliminar del carrito:"));
+  const IDProductoBorrado = listaCarrito.findIndex(el => el.id === productoAEliminar);
+  if (IDProductoBorrado != -1) {
+    carrito -= listaCarrito[IDProductoBorrado].precio;
+    alert("Producto: " + listaCarrito[IDProductoBorrado].nombre + " " + listaCarrito[IDProductoBorrado].tipo + " borrado con exito.")
+    listaCarrito.splice(IDProductoBorrado,1);
   } else {
-    alert("Entrada no válida. Por favor, ingrese un número de producto válido.");
+    alert("Producto no encontrado.")
   }
 }
 
 function depositarSaldo(){
-  let depositar = parseFloat(prompt("Usted tiene: " + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
+  let depositar = parseFloat(prompt("Usted tiene: $" + saldo + " pesos en su cuenta. \nIntroduzca el monto que desee depositar: "));
   saldo += depositar;
-  alert("Su nuevo saldo en su cuenta es de: " + saldo + " pesos.");
+  alert("Su nuevo saldo en su cuenta es de: $" + saldo + " pesos.");
 }
 
 function pagarProductos() {
-  let pago = prompt("Su cuenta dispone de: " + saldo + " pesos. El monto a pagar es de: " + carrito + " pesos. \nPresione '1' para pagar, '2' para volver atras o '3' para depositar en su cuenta.");
+  let pago = prompt("Su cuenta dispone de: $" + saldo + " pesos. El monto a pagar es de: $" + carrito + " pesos. \nPresione '1' para pagar, '2' para volver atras o '3' para depositar en su cuenta.");
   switch(pago) {
     case "1":
       if (carrito > saldo) {
@@ -158,39 +157,28 @@ function pagarProductos() {
         saldo -= carrito;
         listaCarrito.length = 0;
         carrito = 0;
-        alert("Pago exitoso. Su nuevo saldo en su cuenta es de: " + saldo + "pesos.");
+        alert("Pago exitoso. Su nuevo saldo en su cuenta es de: $" + saldo + " pesos.");
         break;
       }
     case "2":
       break;
     case "3":
-      depositarSaldo(depositar)
+      depositarSaldo()
       break;
   }
 }
 
 /* * * * * * * CODIGO * * * * * * * */
-alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
-
 membresia()
-
 let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Pagar. \n 5- Salir");
 while (opcion != 5) {
   switch(opcion) {
     case "1":
-      if (miembro) {
-        alert("Al ser miembro de ❤NaturaForEver❤ tiene un 20% de descuento.");
-      } else {
-        alert("Recuerda que siendo miembro de nuestra tienda podras acceder a descuentos exclusivos.");
-      }
       ejecutarConMiembro(comprarProducto);
       break;
 
     case "2":
       mostrarCarrito();
-      if (elimProducto) {
-        eliminarProductoDelCarrito();
-      }
       break;
 
     case "3":
