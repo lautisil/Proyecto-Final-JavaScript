@@ -1,3 +1,30 @@
+/* VARIABLES */
+let contraseña = "12345";  // ***  CONTRASEÑA  ***
+let miembro = false;
+let elimProducto = false;
+let saldo = 0;
+let carrito = 0;
+
+/* CLASS Y OBJETOS */
+class Producto {
+  constructor(id, nombre, tipo, precio, stock) {
+    this.id = id;
+    this.nombre = nombre;
+    this.tipo = tipo;
+    this.precio = precio;
+    this.stock = stock;
+  };
+};
+
+const perfumeRojo = new Producto(1, "Perfume", "Rojo", 20000, 5);
+const perfumeAzul = new Producto(2, "Perfume", "Azul", 15000, 8);
+const cremaVerde = new Producto(3, "Crema", "Verde", 10000, 12);
+const cremaVioleta = new Producto(4, "Crema", "Violeta", 6000, 23);
+
+/* ARRAYS */
+const listaCarrito = [];
+const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
+
 /* FUNCIONES */
 function membresia() {
   let esMiembro = prompt("Es miembro de nuestra tienda?: \n Responda con 1 para 'Si' y con 2 para 'No'.\n PD: contraseña:12345");
@@ -16,7 +43,9 @@ function membresia() {
         }
       }
     }
-    alert("Contraseña erronea!\n Accedera a nuestra tienda sin promociones y descuentos.");
+    if (!miembro) {
+      alert("Contraseña erronea!\n Accedera a nuestra tienda sin promociones y descuentos.");
+    }
   } else {
     alert("Esta bien, accedera a nuestra tienda sin promociones y descuentos.");
   }
@@ -39,35 +68,19 @@ function ejecutarConMiembro(funcion) {
 }
 
 function comprarProducto() {
-  let compra = prompt("Durante esta semana tendremos a tu disposicion estos perfumes: \n1. Natura Rojo - " + perfumeRojo.precio + "\n2. Natura Azul - "+ perfumeAzul.precio +" \n3. Natura Verde - "+ cremaVerde.precio +" \n4. Natura Violeta - " + cremaVioleta.precio + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar.");
+  let compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo).join("") + "\nSi desea comprar alguno de nuestros productos 2introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
 
-  while (compra != 0) {
-    switch (compra) {
-      case "1":
-        carrito += perfumeRojo.precio;
-        listaCarrito.push(perfumeRojo.nombre + " - $" + perfumeRojo.precio);
-        alert("Carrito: " + carrito + " pesos.");
-        break;
-      case "2":
-        carrito += perfumeAzul.precio;
-        listaCarrito.push(perfumeAzul.nombre + " - $" + perfumeAzul.precio);
-        alert("Carrito: " + carrito + " pesos.");
-        break;
-      case "3":
-        carrito += cremaVerde.precio;
-        listaCarrito.push(cremaVerde.nombre + " - $" + cremaVerde.precio);
-        alert("Carrito: " + carrito + " pesos.");
-        break;
-      case "4":
-        carrito += cremaVioleta.precio;
-        listaCarrito.push(cremaVioleta.nombre + " - $" + cremaVioleta.precio);
-        alert("Carrito: " + carrito + " pesos.");
-        break;
-      default:
-        alert("Opcion no valida");
-        break;
-    }
-    compra = prompt("Durante esta semana tendremos a tu disposicion estos perfumes: \n1. Natura Rojo - " + perfumeRojo.precio + "\n2. Natura Azul - "+ perfumeAzul.precio +" \n3. Natura Verde - "+ cremaVerde.precio +" \n4. Natura Violeta - " + cremaVioleta.precio + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar.");
+  while (compra != 0 && compra <= productosNatura.length ) {
+    // ID del producto
+    let productoCompradoID = productosNatura.find(el => {           //Método find
+      return el.id === compra;
+    });
+
+    carrito += productoCompradoID.precio;
+    listaCarrito.push(productoCompradoID);
+    alert("Total del carrito: $" + carrito + " pesos.");
+
+    compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo).join("") + "\nSi desea comprar alguno de nuestros productos 2introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
   }
 }
 
@@ -155,35 +168,6 @@ function pagarProductos() {
       break;
   }
 }
-
-
-// VARIABLES
-let contraseña = "12345";  // ***  CONTRASEÑA  ***
-let miembro = false;
-let elimProducto = false;
-let saldo = 0;
-let carrito = 0;
-
-//ARRAYS
-const listaCarrito = [];
-
-/* PRODUCTOS */
-class Producto {
-  constructor(nombre, tipo, precio, stock) {
-    this.nombre = nombre;
-    this.tipo = tipo;
-    this.precio = precio;
-    this.stock = stock;
-  };
-};
-
-
-const perfumeRojo = new Producto("Perfume", "Rojo", 20000, 5);
-const perfumeAzul = new Producto("Perfume", "Azul", 15000, 8);
-const cremaVerde = new Producto("Crema", "Verde", 10000, 12);
-const cremaVioleta = new Producto("Crema", "Violeta", 6000, 23);
-
-const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
 
 /* * * * * * * CODIGO * * * * * * * */
 alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
