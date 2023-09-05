@@ -26,6 +26,67 @@ h2 {
     color: white;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 3rem;
-    padding: 10px;
+    padding-top: 10px;
     text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.SmallTitulo {
+    font-size: 20px;
+}
+
+.padre {
+    display: flex;
+    flex-direction: column;
+}
+
+#formulario {
+    margin-top: 10px;
+    max-width: 400px;
+    padding: 30px;
+    border: 3px solid purple;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(37, 37, 37);
+    text-align: center;
+    color: white;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: white;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#btn-submit {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+#btn-submit:hover {
+    background-color: #0056b3;
+    padding: 10px 40px;
 }
