@@ -1,5 +1,5 @@
 /* VARIABLES */
-const contraseña = "12345";  // ***  CONTRASEÑA  ***
+const contraseñaa = "12345";  // ***  CONTRASEÑA  ***
 let miembro = false;
 let saldo = 0;
 let carrito = 0;
@@ -24,16 +24,17 @@ const cremaVioleta = new Producto(4, "Crema", "Violeta", 6000, 23);
 const listaCarrito = [];
 const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
 
+/* CLIENTES */
+
+
 /* FUNCIONES */
 function membresia() {
-  alert("❤ Bievenido/a a Tienda NaturaForEver ❤ \nDonde cuidamos tu bolsillo 💵 y te ofrecemos la mejor calidad 👍.");
-
   let esMiembro = prompt("Es miembro de nuestra tienda?: \n Responda con 1 para 'Si' y con 2 para 'No'.\n PD: contraseña:12345");
 
   if (esMiembro == "1") {
     for (let i = 3; i >= 0; i--) { 
       contraseñaIngresada = prompt("Introduzca su contraseña: ");
-      if (contraseñaIngresada == contraseña) {
+      if (contraseñaIngresada == contraseñaa) {
         alert("Bievenido Juan Perez! Tienes acceso a todos nuestros descuentos. Y un bono de $20.000 para tus primeras compras.");
         miembro = true;
         saldo += 20000;
