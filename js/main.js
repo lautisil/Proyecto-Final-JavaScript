@@ -30,45 +30,56 @@ function agregarAlCarrito(producto) {
   alert("Producto agregado al carrito: " + producto.nombre + " " + producto.tipo);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const botonesCompra = document.querySelectorAll(".btn-submit");
 
   botonesCompra.forEach((boton, index) => {
-    boton.addEventListener("click", function () {
-      agregarAlCarrito(productosNatura[index]);
-    });
+      boton.addEventListener("click", () => {
+          agregarAlCarrito(productosNatura[index]);
+          
+      });
   });
-});
-
-document.addEventListener("click", function () {
-  mostrarCarrito();
 });
 
 function mostrarCarrito() {
   if (listaCarrito.length === 0) {
-    Swal.fire({
-      icon: 'error',
-      title: 'No hay nada en el carrito.',
-    })
+      Swal.fire({
+          icon: 'error',
+          title: 'No hay nada en el carrito.',
+      })
   } else {
-    let mensaje = "Productos en el carrito:\n";
-    mensaje += listaCarrito.map((el) => {
-      return "ID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.";
-    }).join("\n")
-    mensaje += "\n\nTotal en el carrito: $" + carrito + " pesos.";
-    let quiereEliminarProducto = prompt(mensaje + "\nDesea eliminar algun producto? Presione '1' para Si o '2' para no.");
-    switch (quiereEliminarProducto) {
-      case "1":
-        eliminarProductoDelCarrito()
-        break;
-      case "2":
-        break;
-      default:
-        alert("Elija una opcion correcta.")
-        break;
-    }
+      let mensaje = "Productos en el carrito:\n";
+      mensaje += listaCarrito.map((el) => {
+          return "ID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.";
+      }).join("\n")
+      mensaje += "\n\nTotal en el carrito: $" + carrito + " pesos.";
+
+      // Mostrar los productos en el div "carritoContenedor"
+      const carritoContenedor = document.getElementById("carritoContenedor");
+      carritoContenedor.innerHTML = mensaje;
+
+      let quiereEliminarProducto = prompt(mensaje + "\nDesea eliminar algun producto? Presione '1' para Si o '2' para no.");
+      switch (quiereEliminarProducto) {
+          case "1":
+              eliminarProductoDelCarrito();
+              break;
+          case "2":
+              break;
+          default:
+              alert("Elija una opción correcta.")
+              break;
+      }
   }
 }
+
+// Agregar un evento de clic al enlace "Carrito"
+var carritoLink = document.getElementById("#carrito");
+carritoLink.addEventListener("click", mostrarCarrito());
+
+const clickboton = document.getElementsByClassName(".btn-submit");
+clickboton.addEventListener("click", () => {
+  alert("HI")
+})
 
 function eliminarProductoDelCarrito() {
   if (listaCarrito.length === 0) {
