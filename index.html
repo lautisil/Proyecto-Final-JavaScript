@@ -4,45 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title> Proyecto Final - JavaScript </title>
 </head>
 
-<body>
+<header>
     <h1><span>Proyecto Final - JavaScript</span></h1>
     <hr />
     <h2>NaturaForEver</h2>
     <h2 class="SmallTitulo">❤ Bievenido/a a Tienda NaturaForEver ❤</h2>
-    <div id="formulario">
-        <h3>REGISTRO</h3>
-        <form id="formRegistro">
-            <label for="nombre">Nombre Completo</label>
-            <input type="text" id="nombre" name="nombre" required>
-
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="contraseña">Contraseña</label>
-            <input type="text" id="contraseña" name="contraseña" required>
-
-            <label for="guardarDatos">Guardar datos</label>
-            <input type="checkbox" id="checkbox" name="guardarDatos">
-
-            <button type="submit" id="btnRegistrar" class="btn-submit">Registrarse</button>
-        </form>
+    <div class="navbar">
+        <a href="#" id="carrito">Carrito</a>
+        <a href="#" id="cuenta">Cuenta</a>
     </div>
-    <div id="formulario">
-        <h3>INGRESO</h3>
-        <form id="formIngreso">
-            <label for="emailCliente">E-mail</label>
-            <input type="text" id="emailCliente" name="emailCliente" required>
+</header>
 
-            <label for="contraseñaCliente">Contraseña</label>
-            <input type="text" id="contraseñaCliente" name="contraseñaCliente" required>
+<body>
+    <div class="productos-container">
+        <!-- Producto 1 -->
+        <div class="producto">
+            <img src="img/perfumeRojo.jpg" alt="Producto 1">
+            <h3 class="contenidoProducto">Pefume Rojo</h3>
+            <p class="contenidoProducto">Precio: $20.00</p>
+            <button type="submit" class="btn-submit">Comprar</button>
+        </div>
 
-            <button type="submit" id="btnIngresar" class="btn-submit">Ingresar</button>
-        </form>
+        <!-- Producto 2 -->
+        <div class="producto">
+            <img src="img/perfumeAzul.jpg" alt="Producto 2">
+            <h3 class="contenidoProducto">Perfume Azul</h3>
+            <p class="contenidoProducto">Precio: $15.00</p>
+            <button type="submit" class="btn-submit">Comprar</button>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto">
+            <img src="img/cremaVerde.jpg" alt="Producto 3">
+            <h3 class="contenidoProducto">Crema Verde</h3>
+            <p class="contenidoProducto">Precio: $10.00</p>
+            <button type="submit" class="btn-submit">Comprar</button>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="producto">
+            <img src="img/cremaVioleta.jpg" alt="Producto 4">
+            <h3 class="contenidoProducto">Crema Violeta</h3>
+            <p class="contenidoProducto">Precio: $6.00</p>
+            <button type="submit" class="btn-submit">Comprar</button>
+        </div>
     </div>
-    
-    <script src="./js/main.js"></script>
+    <!-- <script src="./js/main.js"></script> -->
 </body>

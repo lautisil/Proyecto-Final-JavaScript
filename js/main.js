@@ -24,34 +24,22 @@ const cremaVioleta = new Producto(4, "Crema", "Violeta", 6000, 23);
 const listaCarrito = [];
 const productosNatura = [perfumeRojo, perfumeAzul, cremaVerde, cremaVioleta]
 
-/* CLIENTES */
-
-
 /* FUNCIONES */
-function membresia() {
-  let esMiembro = prompt("Es miembro de nuestra tienda?: \n Responda con 1 para 'Si' y con 2 para 'No'.\n PD: contraseña:12345");
-
-  if (esMiembro == "1") {
-    for (let i = 3; i >= 0; i--) { 
-      contraseñaIngresada = prompt("Introduzca su contraseña: ");
-      if (contraseñaIngresada == contraseñaa) {
-        alert("Bievenido Juan Perez! Tienes acceso a todos nuestros descuentos. Y un bono de $20.000 para tus primeras compras.");
-        miembro = true;
-        saldo += 20000;
-        break;
-      } else {
-        if (i != 0){
-          alert("Contraseña erronea. Le quedan " + i + " intentos.");
-        }
-      }
-    }
-    if (!miembro) {
-      alert("Contraseña erronea!\n Accedera a nuestra tienda sin promociones y descuentos.");
-    }
-  } else {
-    alert("Esta bien, accedera a nuestra tienda sin promociones y descuentos.");
-  }
+function agregarAlCarrito(producto) {
+  carrito += producto.precio;
+  listaCarrito.push(producto);
+  alert("Producto agregado al carrito: " + producto.nombre + " " + producto.tipo);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const botonesCompra = document.querySelectorAll(".btn-submit");
+
+  botonesCompra.forEach((boton, index) => {
+    boton.addEventListener("click", function () {
+      agregarAlCarrito(productosNatura[index]);
+    });
+  });
+});
 
 function aplicarDescuento(productos, descuento) {
   for (let i = 0; i < productos.length; i++) {
