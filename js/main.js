@@ -1,6 +1,5 @@
+import Swal from 'sweetalert2'
 /* VARIABLES */
-const contraseñaa = "12345";  // ***  CONTRASEÑA  ***
-let miembro = false;
 let saldo = 0;
 let carrito = 0;
 
@@ -41,55 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function aplicarDescuento(productos, descuento) {
-  for (let i = 0; i < productos.length; i++) {
-    const producto = productos[i];
-    producto.precio -= producto.precio * (descuento / 100);
-  }
-}
-
-function ejecutarConMiembro(funcion) {
-  if (miembro) { //aplica descuentos
-    alert("Al ser miembro de ❤NaturaForEver❤ tiene un 20% de descuento.");
-    aplicarDescuento(productosNatura,20)
-    funcion();
-  } else { //no hay descuentos
-    alert("Recuerda que siendo miembro de nuestra tienda podras acceder a descuentos exclusivos.");
-    funcion();
-  }
-}
-
-function comprarProducto() {
-  let compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
-
-  while (compra != 0) {
-    if (compra > productosNatura.length || compra < 0) {
-
-      alert("El producto no esta a la venta todavia. Elije uno de los que tenemos a disposicion porfavor.")
-      
-      compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
-
-    } else {
-      // ID del producto
-      let productoCompradoID = productosNatura.find(el => {
-        return el.id === compra;
-      });
-
-      carrito += productoCompradoID.precio;
-      listaCarrito.push(productoCompradoID);
-
-      alert("Total del carrito: $" + carrito + " pesos.");
-
-      compra = parseInt(prompt("Durante esta semana tendremos a tu disposicion estos perfumes:" + productosNatura.map((el) => "\nID: " + el.id + " - " + el.nombre + " " + el.tipo + "- $" + el.precio + " pesos.").join("") + "\nSi desea comprar alguno de nuestros productos introduzca el numero del articulo a continuacion: \nIntroduzca '0' para terminar de comprar."));
-    }
-
-    
-  }
-}
+document.addEventListener("click", function () {
+  mostrarCarrito();
+});
 
 function mostrarCarrito() {
   if (listaCarrito.length === 0) {
-    alert("El carrito está vacío.");
+    Swal.fire({
+      icon: 'error',
+      title: 'No hay nada en el carrito.',
+    })
   } else {
     let mensaje = "Productos en el carrito:\n";
     mensaje += listaCarrito.map((el) => {
@@ -158,7 +118,6 @@ function pagarProductos() {
 }
 
 /* * * * * * * CODIGO * * * * * * * */
-membresia()
 let opcion = prompt("Elija lo que desee hacer a continuacion: \n 1- Comprar ofertas exclusivas de la semana. \n 2- Carrito. \n 3- Depositar. \n 4- Pagar. \n 5- Salir");
 while (opcion != 5) {
   switch(opcion) {
