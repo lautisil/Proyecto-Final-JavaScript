@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style-index.css">
+    <link rel="stylesheet" href="./css/style-index.css"
     <title> Proyecto Final - JavaScript </title>
 </head>
 <body>
@@ -14,10 +14,11 @@
     </div>
     
     <header>
-        <h1>Tienda</h1>
+        <h1>Tienda Natura</h1>
 
         <div class="container-icon">
             <div class="container-cart-icon">
+
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -70,6 +71,13 @@
             </div>
         </div>
     </header>
+
+    <div class="boton-pagar">
+        <button class="pagar-carrito">
+            PAGAR PRODUCTOS
+        </button>
+    </div>
+
     <div class="container-items">
         <div class="item">
             <figure>
@@ -132,12 +140,14 @@
             </figure>
             <div class="info-product">
                 <h2>Crema Antisenales</h2>
-                <p class="price">$8.500</p>
+                <p class="price">$8500</p>
                 <button class="btn-add-cart">Añadir al carrito</button>
             </div>
         </div>
     </div>
 
     <script src="./js/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </body>
 </html>

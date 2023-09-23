@@ -52,12 +52,10 @@ header{
     position: absolute;
     top: 55%;
     right: 0;
-
     background-color: #000;
     color: #fff;
     width: 25px;
     height: 25px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,7 +70,6 @@ header{
     position: absolute;
     top: 50px;
     right: 0;
-
     background-color: #fff;
     width: 400px;
     z-index: 1;
@@ -86,9 +83,7 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 30px;
-
     border-bottom: 1px solid rgba(0, 0, 0, 0.20);
-
 }
 
 .info-cart-product{
@@ -144,10 +139,23 @@ header{
     display: none;
 }
 
-
-
-
 /* Main */
+.boton-pagar {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 20px;
+}
+.boton-pagar button{
+    border: none;
+    background: none;
+    background-color: #000;
+    color: #fff;
+    padding: 15px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
 .container-items{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -207,7 +215,10 @@ header{
     text-align: center;
 }
 
-
 .hidden{
     display: none;
 }
+
+.larger-input {
+    width: 80%; /* Ancho más largo para los inputs */
+  }
