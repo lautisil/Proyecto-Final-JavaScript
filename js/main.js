@@ -7,14 +7,13 @@ btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
 });
 
-/* ========================= */
 const cartInfo = document.querySelector('.cart-product');
 const rowProduct = document.querySelector('.row-product');
 
-// Lista de todos los contenedores de productos
+// Lista de contenedores de productos
 const productsList = document.querySelector('.container-items');
 
-// Variable de arreglos de Productos
+// Arreglos Productos
 let allProducts = [];
 
 const valorTotal = document.querySelector('.total-pagar');
@@ -83,7 +82,7 @@ rowProduct.addEventListener('click', e => {
 	}
 });
 
-// Funcion para mostrar  HTML
+// Mostrar  HTML
 const showHTML = () => {
 	if (!allProducts.length) {
 		cartEmpty.classList.remove('hidden');
